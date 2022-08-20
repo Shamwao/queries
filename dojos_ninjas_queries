@@ -1,0 +1,26 @@
+INSERT INTO dojos (name) VALUES ('Sneaky'), ('Silent'), ('Backflips');
+
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM dojos; --Would use a WHERE condition if there was anything else in the DB
+
+INSERT INTO dojos (name) VALUES ('HTML'), ('JS'),('Python');
+
+INSERT INTO ninjas (first_name, last_name, age, created_at, updated_at, dojo_id) 
+VALUES ('Bob', 'Jones', 45, NOW(), NOW(), 4), ('Dave', 'Smith', 42, NOW(), NOW(), 4), ('John', 'Schmidt', 55, NOW(), NOW(), 4);
+
+INSERT INTO ninjas (first_name, last_name, age, created_at, updated_at, dojo_id) 
+VALUES ('Roy', 'Rogers', 58, NOW(), NOW(), 5), ('Steve', 'Stevens', 38, NOW(), NOW(), 5), ('Rick', 'Roller', 40, NOW(), NOW(), 5);
+
+INSERT INTO ninjas (first_name, last_name, age, created_at, updated_at, dojo_id) 
+VALUES ('Sneaky', 'Snek', 22, NOW(), NOW(), 6), ('Silent', 'Sam', 21, NOW(), NOW(), 6), ('Fast', 'Ferdinand', 25, NOW(), NOW(), 6);
+
+SELECT * FROM dojos
+LEFT JOIN ninjas ON dojos.id = ninjas.dojo_id
+WHERE dojos.id = 4;
+
+SELECT * FROM dojos
+LEFT JOIN ninjas ON dojos.id = ninjas.dojo_id
+WHERE dojos.id = (SELECT dojo_id FROM ninjas ORDER BY dojo_id DESC LIMIT 1);
+
+SELECT * FROM dojos
+WHERE dojos.id = (SELECT dojo_id FROM ninjas ORDER BY dojo_id DESC LIMIT 1)
